@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Savana Interativa com Quiz</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, Helvetica, sans-serif;
+            background-color: #f2efe9;
+            color: #333;
+        }
+
+        header {
+            background-image: url("https://upload.wikimedia.org/wikipedia/commons/9/91/Savanna_Africa.jpg");
+            background-size: cover;
+            background-position: center;
+            text-align: center;
+            color: white;
+            padding: 60px 20px;
+            text-shadow: 2px 2px 5px black;
+        }
+
+        main {
+            max-width: 1000px;
+            margin: auto;
+            background-color: white;
+            padding: 30px;
+        }
+
+        h2 {
+            color: #8b5a2b;
+            border-bottom: 2px solid #d4a373;
+            padding-bottom: 5px;
+        }
+
+        button {
+            background-color: #d4a373;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            cursor: pointer;
+            border-radius: 5px;
+            margin: 5px 0;
+        }
+
+        button:hover {
+            background-color: #b07d3c;
+        }
+
+        .quiz {
+            background-color: #f7f3eb;
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        .resultado {
+            font-weight: bold;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <h1>Savana Interativa</h1>
+    <p>Teste seus conhecimentos!</p>
+</header>
+
+<main>
+
+    <section class="quiz">
+        <h2>Quiz da Savana 🦁</h2>
+
+        <p><strong>1. Qual é a principal característica da savana?</strong></p>
+        <button onclick="responder(this, true)">Árvores espaçadas e gramíneas</button><br>
+        <button onclick="responder(this, false)">Florestas densas</button><br>
+        <button onclick="responder(this, false)">Clima frio</button>
+
+        <p><strong>2. Qual animal é típico da savana?</strong></p>
+        <button onclick="responder(this, true)">Leão</button><br>
+        <button onclick="responder(this, false)">Urso polar</button><br>
+        <button onclick="responder(this, false)">Pinguim</button>
+
+        <p><strong>3. No Brasil, qual bioma é considerado uma savana?</strong></p>
+        <button onclick="responder(this, true)">Cerrado</button><br>
+        <button onclick="responder(this, false)">Amazônia</button><br>
+        <button onclick="responder(this, false)">Pampa</button>
+
+        <p class="resultado" id="pontuacao">Pontuação: 0 / 3</p>
+
+        <button onclick="reiniciarQuiz()">Reiniciar Quiz</button>
+    </section>
+
+</main>
+
+<footer>
+    <p style="text-align:center;">Trabalho escolar interativo sobre a Savana © 2026</p>
+</footer>
+
+<script>
+    let pontos = 0;
+    let perguntasRespondidas = 0;
+
+    function responder(botao, correta) {
+        if (botao.classList.contains("respondido")) {
+            return;
+        }
+
+        botao.classList.add("respondido");
+
+        if (correta) {
+            botao.style.backgroundColor = "green";
+            pontos++;
+        } else {
+            botao.style.backgroundColor = "red";
+        }
+
+        perguntasRespondidas++;
+        atualizarPontuacao();
+    }
+
+    function atualizarPontuacao() {
+        document.getElementById("pontuacao").innerText =
+            `Pontuação: ${pontos} / 3`;
+    }
+
+    function reiniciarQuiz() {
+        pontos = 0;
+        perguntasRespondidas = 0;
+
+        const botoes = document.querySelectorAll(".quiz button");
+        botoes.forEach(botao => {
+            botao.style.backgroundColor = "#d4a373";
+            botao.classList.remove("respondido");
+        });
+
+        atualizarPontuacao();
+    }
+</script>
+
+</body>
+</html>
